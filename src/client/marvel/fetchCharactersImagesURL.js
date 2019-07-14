@@ -39,6 +39,8 @@ const getResponseFirstThumbnailObject = response => {
 	return {}
 }
 
+const replaceHTTPwithHTTPS = (url = '') => url.replace('http://', 'https://')
+
 const fetchCharactersImagesURL = (
 	currentRequestOffset,
 	updateCurrentRequestOffset,
@@ -52,7 +54,8 @@ const fetchCharactersImagesURL = (
 		const { path, extension } = getResponseFirstThumbnailObject(response)
 
 		if (path && extension) {
-			if (MARVEL_API_IMAGE_PATH_BLACKLIST.includes(path)) {
+			const httpsPath = replaceHTTPwithHTTPS(path)
+			if (MARVEL_API_IMAGE_PATH_BLACKLIST.includes(httpsPath)) {
 				fetchCharactersImagesURL(
 					currentOffsetToUse + 1,
 					updateCurrentRequestOffset,
@@ -60,7 +63,7 @@ const fetchCharactersImagesURL = (
 					charactersImagesURLs
 				)
 			} else {
-				appendImagePath(charactersImagesURLs, path, extension)
+				appendImagePath(charactersImagesURLs, httpsPath, extension)
 
 				updateCurrentRequestOffset(currentOffsetToUse + 1)
 				if (charactersImagesURLs.length < 5)
