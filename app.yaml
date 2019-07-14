@@ -14,7 +14,7 @@ handlers:
     static_files: build/asset-manifest.json
     upload: build/asset-manifest.json
 
-  - url: /favicon.png
+  - url: /marvel-icon.png
     static_files: build/marvel-icon.png
     upload: build/marvel-icon.png
 
