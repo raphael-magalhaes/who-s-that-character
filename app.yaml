@@ -6,29 +6,36 @@ handlers:
   - url: /
     static_files: build/index.html
     upload: build/index.html
+    secure: always
 
   - url: /static
     static_dir: build/static
+    secure: always
 
   - url: /asset-manifest.json
     static_files: build/asset-manifest.json
     upload: build/asset-manifest.json
+    secure: always
 
   - url: /marvel-icon.png
     static_files: build/marvel-icon.png
     upload: build/marvel-icon.png
+    secure: always
 
   - url: /manifest.json
     static_files: build/manifest.json
     upload: build/manifest.json
+    secure: always
 
   - url: /service-worker.js
     static_files: build/service-worker.js
     upload: build/service-worker.js
+    secure: always
 
   - url: /(.*)
     static_files: build/index.html
     upload: build/index.html
+    secure: always
 
 skip_files:
   - ^.vscode$
