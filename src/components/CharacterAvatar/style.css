@@ -1,0 +1,29 @@
+.character-avatar__container {
+	display: inline-block;
+	width: 12rem;
+	height: 12rem;
+	border-radius: 50%;
+	object-fit: contain;
+}
+
+.character-avatar__image {
+	display: inline-block;
+	margin: 0.625rem;
+	width: 9.375rem;
+	height: 9.375rem;
+	border: 6px solid #37474f;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.character-avatar__grow {
+	transform: scale(1);
+	transition-duration: 0.2s;
+}
+
+.character-avatar__grow:hover {
+	cursor: pointer;
+	border-color: #617c8b;
+	transform: scale(1.1);
+	transition-duration: 0.2s;
+}

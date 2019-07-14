@@ -1,0 +1,3 @@
+const PUBLIC_MARVEL_API_KEY = '3a2f65db79daec84f634c77ed68a96f0'
+
+export default PUBLIC_MARVEL_API_KEY

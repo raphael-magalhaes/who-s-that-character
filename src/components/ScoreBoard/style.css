@@ -1,0 +1,14 @@
+.score-board__container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-left: 1.5rem;
+	height: 4rem;
+}
+
+@media (max-width: 400px) {
+	.score-board__container {
+		flex-direction: column;
+	}
+}

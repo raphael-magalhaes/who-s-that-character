@@ -1,0 +1,11 @@
+.score__container {
+	padding-right: 3rem;
+	font-family: Roboto-Regular;
+	font-size: 1.5rem;
+}
+
+@media (max-width: 400px) {
+	.score__container {
+		padding-right: 0rem;
+	}
+}

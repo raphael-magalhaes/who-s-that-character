@@ -1,0 +1,22 @@
+.home__container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	height: 100%;
+}
+
+.home__spacer {
+	min-height: 2rem;
+	flex: 1;
+}
+
+.home__bottom-items {
+	padding-bottom: 0rem;
+}
+
+.home__start-game {
+	border: 0;
+	background: none;
+	box-shadow: none;
+	border-radius: 0px;
+}

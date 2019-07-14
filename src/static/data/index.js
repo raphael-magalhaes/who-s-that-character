@@ -1,0 +1,9 @@
+import MARVEL_API_IMAGE_PATH_BLACKLIST from './marvelImagePathBlacklist'
+import MARVEL_API_REQUEST_OFFSET_BLACKLIST from './marvelAPIRequestOffsetBlackList'
+import PUBLIC_MARVEL_API_KEY from './publicAPIKey'
+
+export {
+	MARVEL_API_IMAGE_PATH_BLACKLIST,
+	MARVEL_API_REQUEST_OFFSET_BLACKLIST,
+	PUBLIC_MARVEL_API_KEY
+}

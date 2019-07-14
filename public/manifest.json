@@ -1,0 +1,15 @@
+{
+	"short_name": "Guess who is it!",
+	"name": "Guess the Marvel's Comics Character!",
+	"icons": [
+		{
+			"src": "./marvel-icon.png",
+			"sizes": "64x64 32x32 24x24 16x16",
+			"type": "image/x-icon"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#ed1d24",
+	"background_color": "#ed1d24"
+}

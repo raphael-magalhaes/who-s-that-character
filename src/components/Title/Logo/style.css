@@ -1,0 +1,27 @@
+.logo__container {
+	display: inline;
+	border-radius: 50%;
+	object-fit: contain;
+}
+
+.logo__image {
+	display: inline-block;
+	margin: 0.1rem;
+	width: 4.375rem;
+	height: 4.375rem;
+	border: 3px solid #37474f;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.logo__grow {
+	transform: scale(1);
+	transition-duration: 0.2s;
+}
+
+.logo__grow:hover {
+	cursor: pointer;
+	border-color: #ed1d24;
+	transform: scale(1.1);
+	transition-duration: 0.2s;
+}
