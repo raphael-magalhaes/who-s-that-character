@@ -14,9 +14,19 @@
 	padding-bottom: 0rem;
 }
 
-.home__start-game {
+.home__game-information {
+	padding-top: 2rem;
+	min-height: 10rem;
+	max-width: 65rem;
+}
+
+.home__start-game-button {
+	font-family: Marvel-Regular;
+	letter-spacing: 0.125rem;
 	border: 0;
-	background: none;
-	box-shadow: none;
+	color: white;
 	border-radius: 0px;
+	font-size: 1.125rem;
+	padding: 0.7rem;
+	background-color: #ed1d24;
 }

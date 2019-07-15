@@ -1,39 +1,35 @@
 import { http } from 'middleware'
 import {
 	MARVEL_API_IMAGE_PATH_BLACKLIST,
-	MARVEL_API_REQUEST_OFFSET_BLACKLIST,
+	MARVEL_API_REQUEST_OFFSET_WHITELIST,
 	PUBLIC_MARVEL_API_KEY
 } from 'static/data'
 
 const getNextValidRequestOffset = offset => {
-	if (MARVEL_API_REQUEST_OFFSET_BLACKLIST.includes(offset)) {
-		return getNextValidRequestOffset(offset + 1)
+	if (MARVEL_API_REQUEST_OFFSET_WHITELIST.includes(offset)) {
+		return offset
 	}
-	return offset
+	return getNextValidRequestOffset(offset + 1)
 }
 
-const appendImagePath = (
-	charactersImagesURLs = [],
-	newPath,
-	imageExtension
-) => {
+const composeCharacterThumbnailURL = (newPath, imageExtension) => {
 	const MARVEL_IMAGE_VARIANT = 'standard_fantastic'
-	const characterImageURL = `${newPath}/${MARVEL_IMAGE_VARIANT}.${imageExtension}`
-	charactersImagesURLs.push(characterImageURL)
+	return `${newPath}/${MARVEL_IMAGE_VARIANT}.${imageExtension}`
 }
 
-const composeURL = offset => {
+const composeRequestURL = offset => {
 	return `https://gateway.marvel.com:443/v1/public/characters?limit=1&orderBy=name&offset=${offset}&apikey=${PUBLIC_MARVEL_API_KEY}`
 }
 
-const getResponseFirstThumbnailObject = response => {
+const getResponseFirstCharacterInformation = response => {
 	if (
 		response &&
 		response.data &&
 		response.data.data &&
 		response.data.data.results[0]
 	) {
-		return response.data.data.results[0].thumbnail
+		const { name, description, thumbnail } = response.data.data.results[0]
+		return { name, description, thumbnail }
 	}
 
 	return {}
@@ -41,48 +37,58 @@ const getResponseFirstThumbnailObject = response => {
 
 const replaceHTTPwithHTTPS = (url = '') => url.replace('http://', 'https://')
 
-const fetchCharactersImagesURL = (
+const fetchCharactersImagesURL = ({
 	currentRequestOffset,
 	updateCurrentRequestOffset,
-	setCharactersImagesURLs,
-	charactersImagesURLs = []
-) => {
+	updateCharactersInformation,
+	charactersInformation = []
+}) => {
 	const currentOffsetToUse = getNextValidRequestOffset(currentRequestOffset)
-	const url = composeURL(currentOffsetToUse)
+	const url = composeRequestURL(currentOffsetToUse)
 
 	http.get(url).then(response => {
-		const { path, extension } = getResponseFirstThumbnailObject(response)
+		const {
+			name,
+			description,
+			thumbnail
+		} = getResponseFirstCharacterInformation(response)
+
+		const { path, extension } = thumbnail
 
 		if (path && extension) {
 			const httpsPath = replaceHTTPwithHTTPS(path)
 			if (MARVEL_API_IMAGE_PATH_BLACKLIST.includes(httpsPath)) {
-				fetchCharactersImagesURL(
-					currentOffsetToUse + 1,
+				fetchCharactersImagesURL({
+					currentRequestOffset: currentOffsetToUse + 1,
 					updateCurrentRequestOffset,
-					setCharactersImagesURLs,
-					charactersImagesURLs
-				)
+					updateCharactersInformation,
+					charactersInformation
+				})
 			} else {
-				appendImagePath(charactersImagesURLs, httpsPath, extension)
+				charactersInformation.push({
+					url: composeCharacterThumbnailURL(httpsPath, extension),
+					name,
+					description,
+					offset: currentOffsetToUse
+				})
 
 				updateCurrentRequestOffset(currentOffsetToUse + 1)
-				if (charactersImagesURLs.length < 5)
-					fetchCharactersImagesURL(
-						currentOffsetToUse + 1,
+				if (charactersInformation.length < 5)
+					fetchCharactersImagesURL({
+						currentRequestOffset: currentOffsetToUse + 1,
 						updateCurrentRequestOffset,
-						setCharactersImagesURLs,
-						charactersImagesURLs
-					)
+						updateCharactersInformation,
+						charactersInformation
+					})
 			}
 		} else {
 			alert(
 				'TODO: Handle the case where the request has failed to provide the necessary data.'
 			)
 		}
-
-		setCharactersImagesURLs(charactersImagesURLs)
-		return charactersImagesURLs
 	})
+
+	return charactersInformation
 }
 
 export default fetchCharactersImagesURL

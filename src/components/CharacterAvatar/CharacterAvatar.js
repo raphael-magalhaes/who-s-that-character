@@ -16,11 +16,7 @@ const onMouseOver = () => {
 	playHoverSound()
 }
 
-const onClick = () => {
-	alert('Howdy, stranger. This feature is in progress!')
-}
-
-const CharacterImage = ({ src = NO_IMAGE_GIF }) => {
+const CharacterImage = ({ src = NO_IMAGE_GIF, onClick }) => {
 	return (
 		<div className={'character-avatar__container'}>
 			<img
