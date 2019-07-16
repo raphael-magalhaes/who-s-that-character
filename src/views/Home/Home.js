@@ -7,7 +7,7 @@ const MAX_NUMBER_OF_MATCHES = 9
 
 const checkForGameOver = numberOfMatches => {
 	if (numberOfMatches === MAX_NUMBER_OF_MATCHES) {
-	alert(`[WIP] This feature is not ready
+		alert(`[WIP] This feature is not ready
 	
 	The game is over!
 
@@ -61,27 +61,26 @@ const Home = () => {
 	return (
 		<div className='home__container'>
 			{/* TODO: Extract inline css to a css class */}
-			<div className='home__spacer' style={
-				{
+			<div
+				style={{
 					width: '100%',
 					display: 'flex',
 					flexDirection: 'column',
 					backgroundColor: '#ed1d24',
 					alignItems: 'center',
-					justifyContent: 'space-evenly',
-					verticalAlign: 'middle'
-					}
-				}>
+					justifyContent: 'flex-start',
+					padding: '1rem 0 1rem'
+				}}>
 				<Title />
-				<ScoreBoard />
 			</div>
+			<ScoreBoard />
 			{/* TODO: Componentize the get characters button and start game information */}
 			<div className=' home__game-information'>
 				<button
 					className={'home__start-game-button'}
 					onClick={async () => {
 						if (checkForGameOver(numberOfMatches)) {
- 							updateCharactersInformation([])
+							updateCharactersInformation([])
 							updateCharacterIndex(undefined)
 							updateNumberOfMatches(0)
 							updateRequestOffset(0)
