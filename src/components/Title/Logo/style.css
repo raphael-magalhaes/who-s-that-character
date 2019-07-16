@@ -21,7 +21,7 @@
 
 .logo__grow:hover {
 	cursor: pointer;
-	border-color: #ed1d24;
+	border-color: #28343a;
 	transform: scale(1.1);
 	transition-duration: 0.2s;
 }
