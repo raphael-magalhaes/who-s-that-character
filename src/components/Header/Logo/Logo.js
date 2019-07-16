@@ -1,9 +1,11 @@
 import React from 'react'
 import './style.css'
 
+const LOGO_GIF_URL = 'https://i.giphy.com/media/Ec8692cTyljWg/giphy.webp'
+const THE_AVENGERS_THEME_SONG_URL =
+	'https://medea-music.com/wp-content/uploads/2018/05/The-Avengers-Theme-Song.mp3?_=2'
+
 const setupHoverSound = () => {
-	const THE_AVENGERS_THEME_SONG_URL =
-		'https://medea-music.com/wp-content/uploads/2018/05/The-Avengers-Theme-Song.mp3?_=2'
 	const audio = new Audio(THE_AVENGERS_THEME_SONG_URL)
 	audio.volume = 0.15
 	return audio
@@ -33,7 +35,7 @@ const Logo = () => {
 				draggable='false'
 				onMouseOver={onMouseOver}
 				onMouseLeave={onMouseLeave}
-				src={'https://i.giphy.com/media/Ec8692cTyljWg/giphy.webp'}
+				src={LOGO_GIF_URL}
 			/>
 		</div>
 	)

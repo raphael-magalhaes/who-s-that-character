@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CharacterAvatar, ScoreBoard, Title } from 'components'
+import { CharacterAvatar, ScoreBoard, Header } from 'components'
 import { marvel } from 'client'
 import './style.css'
 
@@ -60,19 +60,7 @@ const Home = () => {
 
 	return (
 		<div className='home__container'>
-			{/* TODO: Extract inline css to a css class */}
-			<div
-				style={{
-					width: '100%',
-					display: 'flex',
-					flexDirection: 'column',
-					backgroundColor: '#ed1d24',
-					alignItems: 'center',
-					justifyContent: 'flex-start',
-					padding: '1rem 0 1rem'
-				}}>
-				<Title />
-			</div>
+			<Header />
 			<ScoreBoard />
 			{/* TODO: Componentize the get characters button and start game information */}
 			<div className=' home__game-information'>

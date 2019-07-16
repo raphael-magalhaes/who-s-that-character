@@ -10,7 +10,13 @@ const setupHoverSound = () => {
 }
 
 const hoverSound = setupHoverSound()
-const playHoverSound = () => hoverSound.play()
+
+const playHoverSound = () =>
+	hoverSound.play().catch(() => {
+		// Intentionally suppresses the error.
+		// FIXME: Remove this catch and fix the error:
+		// Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause(). https://goo.gl/LdLk22
+	})
 
 const onMouseOver = () => {
 	playHoverSound()
