@@ -61,7 +61,7 @@ const Home = () => {
 	return (
 		<div className='home__container'>
 			<Header />
-			<ScoreBoard />
+			<ScoreBoard score={1200} lifes={3} />
 			{/* TODO: Componentize the get characters button and start game information */}
 			<div className=' home__game-information'>
 				<button

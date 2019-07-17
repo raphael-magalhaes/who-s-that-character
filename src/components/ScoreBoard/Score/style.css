@@ -1,7 +1,7 @@
 .score__container {
 	padding-right: 3rem;
-	font-family: Roboto-Regular;
-	font-size: 1.5rem;
+	width: 12.625rem;
+	text-align: left;
 }
 
 @media (max-width: 400px) {

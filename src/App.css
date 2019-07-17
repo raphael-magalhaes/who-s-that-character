@@ -32,3 +32,8 @@
 .box__soft-shadow {
 	box-shadow: black 0px 0px 2px 1px;
 }
+
+.font-roboto__headline {
+	font-family: Roboto-Regular;
+	font-size: 1.5rem;
+}
