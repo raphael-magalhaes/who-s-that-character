@@ -24,3 +24,11 @@
 	background-image: url('./static/assets/images/comics-background.jpg');
 	filter: brightness(25%) contrast(115%);
 }
+
+.text__soft-shadow {
+	text-shadow: 0px 1px 4px #000;
+}
+
+.box__soft-shadow {
+	box-shadow: black 0px 0px 2px 1px;
+}

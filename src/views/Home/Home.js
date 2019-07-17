@@ -65,7 +65,9 @@ const Home = () => {
 			{/* TODO: Componentize the get characters button and start game information */}
 			<div className=' home__game-information'>
 				<button
-					className={'home__start-game-button'}
+					className={
+						'home__start-game-button text__soft-shadow box__soft-shadow'
+					}
 					onClick={async () => {
 						if (checkForGameOver(numberOfMatches)) {
 							updateCharactersInformation([])
