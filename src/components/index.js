@@ -1,5 +1,6 @@
+import CharactersGroup from './CharactersGroup'
+import CommunicationBoard from './CommunicationBoard'
 import Header from './Header'
 import ScoreBoard from './ScoreBoard'
-import CharactersGroup from './CharactersGroup'
 
-export { CharactersGroup, Header, ScoreBoard }
+export { CharactersGroup, CommunicationBoard, Header, ScoreBoard }

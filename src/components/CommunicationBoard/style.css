@@ -1,0 +1,26 @@
+.communication-board__container {
+    display: flex;
+    align-items: center;
+	flex-direction: column;
+	padding-top: 2rem;
+	min-height: 10rem;
+	max-width: 65rem;
+}
+
+.communication-board__confirm-button {
+	display: block;
+	width: 10rem;
+	font-family: Marvel-Regular;
+	letter-spacing: 0.125rem;
+	border: 0;
+	color: white;
+	border-radius: 0px;
+	font-size: 1.125rem;
+	padding: 0.7rem;
+	background-color: #ed1d24;
+}
+
+.communication-board__message {
+	font-family: 'Roboto-Regular';
+	font-weight: '400';
+}
