@@ -46,47 +46,54 @@ const fetchCharactersImagesURL = ({
 	const currentOffsetToUse = getNextValidRequestOffset(currentRequestOffset)
 	const url = composeRequestURL(currentOffsetToUse)
 
-	http.get(url).then(response => {
-		const {
-			name,
-			description,
-			thumbnail
-		} = getResponseFirstCharacterInformation(response)
+	http
+		.get(url)
+		.then(response => {
+			const {
+				name,
+				description,
+				thumbnail
+			} = getResponseFirstCharacterInformation(response)
 
-		const { path, extension } = thumbnail
+			const { path, extension } = thumbnail
 
-		if (path && extension) {
-			const httpsPath = replaceHTTPwithHTTPS(path)
-			if (MARVEL_API_IMAGE_PATH_BLACKLIST.includes(httpsPath)) {
-				fetchCharactersImagesURL({
-					currentRequestOffset: currentOffsetToUse + 1,
-					updateCurrentRequestOffset,
-					updateCharactersInformation,
-					charactersInformation
-				})
-			} else {
-				charactersInformation.push({
-					url: composeCharacterThumbnailURL(httpsPath, extension),
-					name,
-					description,
-					offset: currentOffsetToUse
-				})
-
-				updateCurrentRequestOffset(currentOffsetToUse + 1)
-				if (charactersInformation.length < 5)
+			if (path && extension) {
+				const httpsPath = replaceHTTPwithHTTPS(path)
+				if (MARVEL_API_IMAGE_PATH_BLACKLIST.includes(httpsPath)) {
 					fetchCharactersImagesURL({
 						currentRequestOffset: currentOffsetToUse + 1,
 						updateCurrentRequestOffset,
 						updateCharactersInformation,
 						charactersInformation
 					})
+				} else {
+					charactersInformation.push({
+						url: composeCharacterThumbnailURL(httpsPath, extension),
+						name,
+						description,
+						offset: currentOffsetToUse
+					})
+
+					updateCurrentRequestOffset(currentOffsetToUse + 1)
+					if (charactersInformation.length < 5)
+						fetchCharactersImagesURL({
+							currentRequestOffset: currentOffsetToUse + 1,
+							updateCurrentRequestOffset,
+							updateCharactersInformation,
+							charactersInformation
+						})
+				}
+			} else {
+				alert(
+					'TODO: Handle the case where the request has failed to provide the necessary data.'
+				)
 			}
-		} else {
-			alert(
-				'TODO: Handle the case where the request has failed to provide the necessary data.'
-			)
-		}
-	})
+		})
+		.catch(() => {
+			alert('An error has occured.')
+			charactersInformation = []
+			return charactersInformation
+		})
 
 	return charactersInformation
 }
