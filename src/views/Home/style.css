@@ -12,10 +12,6 @@
 	flex: 1;
 }
 
-.home__bottom-items {
-	padding-bottom: 0rem;
-}
-
 .home__game-information {
 	padding-top: 2rem;
 	min-height: 10rem;

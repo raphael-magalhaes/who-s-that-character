@@ -1,5 +1,5 @@
-import CharacterAvatar from './CharacterAvatar'
 import Header from './Header'
 import ScoreBoard from './ScoreBoard'
+import CharactersGroup from './CharactersGroup'
 
-export { CharacterAvatar, Header, ScoreBoard }
+export { CharactersGroup, Header, ScoreBoard }

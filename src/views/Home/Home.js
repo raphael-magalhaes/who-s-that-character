@@ -1,5 +1,5 @@
 import React from 'react'
-import { CharacterAvatar, ScoreBoard, Header } from 'components'
+import { CharactersGroup, Header, ScoreBoard } from 'components'
 import { marvel } from 'client'
 import './style.css'
 
@@ -199,37 +199,10 @@ class Home extends React.Component {
 							charactersInformation[characterIndexToBeGuessed].description}
 					</p>
 				</div>
-				<div className='home__bottom-items home__spacer'>
-					{/* TODO: Componentize these 5 CharacterAvatar */}
-					<CharacterAvatar
-						src={charactersInformation[0] && charactersInformation[0].url}
-						onClick={() => {
-							this.onUserGuess(0)
-						}}
-					/>
-					<CharacterAvatar
-						src={charactersInformation[1] && charactersInformation[1].url}
-						onClick={() => {
-							this.onUserGuess(1)
-						}}
-					/>
-					<CharacterAvatar
-						src={charactersInformation[2] && charactersInformation[2].url}
-						onClick={() => {
-							this.onUserGuess(2)
-						}}
-					/>
-					<CharacterAvatar
-						src={charactersInformation[3] && charactersInformation[3].url}
-						onClick={() => {
-							this.onUserGuess(3)
-						}}
-					/>
-					<CharacterAvatar
-						src={charactersInformation[4] && charactersInformation[4].url}
-						onClick={() => {
-							this.onUserGuess(4)
-						}}
+				<div className='home__spacer'>
+					<CharactersGroup
+						charactersInformation={charactersInformation}
+						onAvatarClick={this.onUserGuess}
 					/>
 				</div>
 			</div>
