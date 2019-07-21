@@ -1,6 +1,6 @@
 .communication-board__container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 	flex-direction: column;
 	padding-top: 2rem;
 	min-height: 10rem;
@@ -17,6 +17,14 @@
 	border-radius: 0px;
 	font-size: 1.125rem;
 	padding: 0.7rem;
+	background-color: #ed1d24;
+}
+
+.communication-board__confirm-button:hover {
+	background-color: #cb0b02;
+}
+
+.communication-board__confirm-button:active {
 	background-color: #ed1d24;
 }
 
