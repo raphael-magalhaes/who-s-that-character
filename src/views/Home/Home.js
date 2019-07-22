@@ -12,49 +12,40 @@ const MAX_NUMBER_OF_MATCHES = 9
 const POINTS_PER_CORRECT_ANSWER = 100
 
 class Home extends React.Component {
-	state = {
-		communicationBoardMessage: undefined,
-		communicationBoardButtonText: undefined,
-		communicationBoardButtonCallback: undefined,
-		onCharacterAvatarClick: () => {},
-		numberOfPlayedMatches: 0,
-		marvelAPICurrentRequestOffset: 0,
-		isLoadingCharacters: false,
-		charactersInformation: [],
-		characterIndexToBeGuessed: undefined,
-		scorePoints: 0,
-		numberOfLives: 3
+	constructor() {
+		super()
+		this.state = {
+			onCharacterAvatarClick: () => {},
+			numberOfPlayedMatches: 0,
+			marvelAPICurrentRequestOffset: 0,
+			isLoadingCharacters: false,
+			charactersInformation: [],
+			characterIndexToBeGuessed: undefined,
+			scorePoints: 0,
+			numberOfLives: 3,
+			...this.getInitialGameMessage()
+		}
 	}
 
-	componentDidMount = () => {
-		this.setInitialGameMessage()
-	}
-
-	setInitialGameMessage = () => {
-		this.setState({
-			communicationBoardMessage: `Press PLAY THE GAME, then read the character's description
+	getInitialGameMessage = () => ({
+		communicationBoardMessage: `Press PLAY THE GAME, then read the character's description
 			and make your guess by clicking or tapping in the character's image!`,
-			communicationBoardButtonText: 'PLAY THE GAME',
-			communicationBoardButtonCallback: this.onFetchCharactersImagesURL,
-			onCharacterAvatarClick: this.onUserGuess
-		})
-	}
+		communicationBoardButtonText: 'PLAY THE GAME',
+		communicationBoardButtonCallback: this.onFetchCharactersImagesURL,
+		onCharacterAvatarClick: this.onUserGuess
+	})
 
-	setGameLoadingMessage = () => {
-		this.setState({
-			communicationBoardMessage: `Wait untill all characters are ready!`,
-			communicationBoardButtonText: undefined,
-			communicationBoardButtonCallback: undefined
-		})
-	}
+	getGameLoadingMessage = () => ({
+		communicationBoardMessage: `Wait untill all characters are ready!`,
+		communicationBoardButtonText: undefined,
+		communicationBoardButtonCallback: undefined
+	})
 
-	setCharacterDescriptionMessage = description => {
-		this.setState({
-			communicationBoardMessage: `Who is this: ${description}`,
-			communicationBoardButtonText: undefined,
-			communicationBoardButtonCallback: undefined
-		})
-	}
+	getCharacterDescriptionMessage = description => ({
+		communicationBoardMessage: `Who is this: ${description}`,
+		communicationBoardButtonText: undefined,
+		communicationBoardButtonCallback: undefined
+	})
 
 	setGameOverMessage = () => {
 		const { numberOfLives, scorePoints } = this.state
@@ -92,9 +83,9 @@ class Home extends React.Component {
 			charactersInformation: [],
 			characterIndexToBeGuessed: undefined,
 			scorePoints: 0,
-			numberOfLives: 3
+			numberOfLives: 3,
+			...this.getInitialGameMessage()
 		})
-		this.setInitialGameMessage()
 	}
 
 	chooseCharacterIndexToGuess = () => {
@@ -104,8 +95,10 @@ class Home extends React.Component {
 		const description =
 			charactersInformation[characterIndexToBeGuessed].description
 
-		this.setState({ characterIndexToBeGuessed })
-		this.setCharacterDescriptionMessage(description)
+		return {
+			characterIndexToBeGuessed,
+			...this.getCharacterDescriptionMessage(description)
+		}
 	}
 
 	updateRequestOffset = marvelAPICurrentRequestOffset => {
@@ -124,20 +117,22 @@ class Home extends React.Component {
 			characterIndexToBeGuessed === undefined
 		) {
 			setTimeout(() => {
-				this.chooseCharacterIndexToGuess()
-				this.setState({ isLoadingCharacters: false })
+				this.setState({
+					isLoadingCharacters: false,
+					...this.chooseCharacterIndexToGuess()
+				})
 			}, 700)
 		}
 	}
 
 	onFetchCharactersImagesURL = async () => {
 		const { marvelAPICurrentRequestOffset, numberOfPlayedMatches } = this.state
-		this.setGameLoadingMessage()
 		this.setState({
 			isLoadingCharacters: true,
 			charactersInformation: [],
 			characterIndexToBeGuessed: undefined,
-			onCharacterAvatarClick: this.onUserGuess
+			onCharacterAvatarClick: this.onUserGuess,
+			...this.getGameLoadingMessage()
 		})
 
 		const result = await marvel.fetchCharactersImagesURL({
